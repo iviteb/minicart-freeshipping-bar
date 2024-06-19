@@ -1,10 +1,10 @@
 {
-  "store/minicartbar.freeshipping.complete-order": "Complete your order to have {freeshippingText}",
+  "store/minicartbar.freeshipping.complete-order": "Complete your order to have {value}",
   "store/minicartbar.freeshipping.text": "FREE shipping",
-  "store/minicartbar.freeshipping.left": "Only left {freeshippingValue}!",
+  "store/minicartbar.freeshipping.left": "Only left {value}!",
   "store/minicartbar.freeshipping.win": "You won free shipping",
-  "store/minicartbar.gift.complete-order": "Complete your order to have a {giftText}",
-  "store/minicartbar.gift.text": "GIFT",
-  "store/minicartbar.gift.left": "Only left {giftValue}",
-  "store/minicartbar.gift.win": "You won a gift"
+  "store/minicartbar.receive-gift.complete-order": "Complete your order to have a {value}",
+  "store/minicartbar.receive-gift.text": "GIFT",
+  "store/minicartbar.receive-gift.left": "Only left {value}",
+  "store/minicartbar.receive-gift.win": "You won a gift"
 }

@@ -13,16 +13,16 @@ export const messages = defineMessages({
   freeshippingWin: {
     id: 'store/minicartbar.freeshipping.win',
   },
-  giftCompleteOrder: {
-    id: 'store/minicartbar.gift.complete-order',
+  receiveGiftCompleteOrder: {
+    id: 'store/minicartbar.receive-gift.complete-order',
   },
-  giftText: {
-    id: 'store/minicartbar.gift.text',
+  receiveGiftText: {
+    id: 'store/minicartbar.receive-gift.text',
   },
-  giftLeft: {
-    id: 'store/minicartbar.gift.left',
+  receiveGiftLeft: {
+    id: 'store/minicartbar.receive-gift.left',
   },
-  giftWin: {
-    id: 'store/minicartbar.gift.win',
+  receiveGiftWin: {
+    id: 'store/minicartbar.receive-gift.win',
   },
 })

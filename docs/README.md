@@ -6,19 +6,24 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-The **Mini Cart Free Shipping Bar** is a MiniCart.v2 component that adds a progress bar to the minicart in order to display how much progress a customer has to **win** free shipping.
+![image](https://github.com/iviteb/minicart-freeshipping-bar/assets/77269087/bbff7971-731c-4326-bf8c-fced2daf0b2e)
+![image](https://github.com/iviteb/minicart-freeshipping-bar/assets/77269087/87786efb-bb63-4045-a6de-10c8a82fe808)
 
-This block is **only a visual guide**, meaning it will not make any calculation or deduct the shipping amount from your store. You should pair this app with a **Free Shipping Promotion** of the same **amount**
-The **amount** value, can be edited inside the **App Settings**
+The **Mini Cart Free Shipping Bar** is a MiniCart.v2 component that adds a progress bar to the minicart in order to display how much progress a customer has to **win** free shipping or a gift.
 
-The app is compatible with 5 different languages including: English, Spanish, Italian, Portuguese and Romanian.
+This block is **only a visual guide**, meaning it will not make any calculation or deduct the shipping amount from your store. You should pair this app with a **Free Shipping Promotion** of the same **amount** or a **Gift Promotion**.
+The **amount** value for free shipping or gift, can be edited inside the **App Settings**
+
+The app is compatible with 2 different languages including: English and Romanian.
 
 ## Settings
 
-The app has one configurable setting under My Apps section inside VTEX Admin.
-The setting is the **amount** for free shipping: expects a number.
-This free shipping will be indicated for the different commercial policies, in this case 4 policies have been added
-This will be the amount customers have to reach for the progress bar to completely fill up.
+The app has two configurable settings under My Apps section inside VTEX Admin:
+
+- **Free Shipping Amount** - this setting is the **amount** for free shipping and expects a number.
+  This free shipping will be indicated for the different commercial policies, in this case 4 policies have been added
+  This will be the amount customers have to reach for the progress bar to completely fill up.
+- **Receive Gift Amount** - this setting is the **amoount** for gift and expects a number
 
 ## Configuration
 
@@ -117,10 +122,10 @@ After this is completed, you should add the block **minicart-bar** inside your *
 Here is the list of available CSS Handles you can use on the store
 | CSS Handles |
 | ----------- |
-| `freigthScaleContainer` |
-| `.sliderContainer` |
-| `.barContainer` |
-| `.text1` |
-| `.text2` |
-| `.text3` |
-| `.text4` |
+| `.freigthScaleContainer` |
+| `.valueScaleContainer` |
+| `.completeOrder` |
+| `.text` |
+| `.left` |
+| `.win` |
+| `.progressBarContainer` |

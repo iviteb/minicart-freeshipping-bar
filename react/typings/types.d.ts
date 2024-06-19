@@ -2,6 +2,7 @@ type Totalizer = Array<{ id: string; name: string; value: number }>
 
 type FreeShippingProps = {
   freeShippingAmount: number
+  receiveGiftAmount: number
   tradePolicy: string
 }
 

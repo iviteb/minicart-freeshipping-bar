@@ -1,10 +1,10 @@
 {
-  "store/minicartbar.freeshipping.complete-order": "Completează comanda ta pentru {freeshippingText}",
+  "store/minicartbar.freeshipping.complete-order": "Completează comanda ta pentru {value}",
   "store/minicartbar.freeshipping.text": "livrare GRATUITĂ",
-  "store/minicartbar.freeshipping.left": "Au rămas doar {freeshippingValue}!",
+  "store/minicartbar.freeshipping.left": "Au rămas doar {value}!",
   "store/minicartbar.freeshipping.win": "Ai câștigat livrare gratuită",
-  "store/minicartbar.gift.complete-order": "Completează comanda ta pentru a câștiga un {giftText}",
-  "store/minicartbar.gift.text": "CADOU",
-  "store/minicartbar.gift.left": "Au rămas doar {giftValue}",
-  "store/minicartbar.gift.win": "Ai câștigat un cadou"
+  "store/minicartbar.receive-gift.complete-order": "Completează comanda ta pentru a câștiga un {value}",
+  "store/minicartbar.receive-gift.text": "CADOU",
+  "store/minicartbar.receive-gift.left": "Au rămas doar {value}",
+  "store/minicartbar.receive-gift.win": "Ai câștigat un cadou"
 }
