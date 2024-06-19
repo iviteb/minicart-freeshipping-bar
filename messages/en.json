@@ -1,7 +1,10 @@
 {
-  "store/minicartbar.text0": "We have free shipping from: ",
-  "store/minicartbar.text1": "Complete your order to have",
-  "store/minicartbar.text2": "FREE shipping",
-  "store/minicartbar.text3": "Only left",
-  "store/minicartbar.text4": "You won free shipping"
+  "store/minicartbar.freeshipping.complete-order": "Complete your order to have {freeshippingText}",
+  "store/minicartbar.freeshipping.text": "FREE shipping",
+  "store/minicartbar.freeshipping.left": "Only left {freeshippingValue}!",
+  "store/minicartbar.freeshipping.win": "You won free shipping",
+  "store/minicartbar.gift.complete-order": "Complete your order to have a {giftText}",
+  "store/minicartbar.gift.text": "GIFT",
+  "store/minicartbar.gift.left": "Only left {giftValue}",
+  "store/minicartbar.gift.win": "You won a gift"
 }
