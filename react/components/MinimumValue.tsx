@@ -32,39 +32,39 @@ const MinimumValue: React.FC<MinimumValueProps> = ({
   valueKey,
   messagePrefix,
 }) => {
-  const { binding } = useRuntime()
-  const { session } = useRenderSession()
+  // const { binding } = useRuntime()
+  // const { session } = useRenderSession()
   // const [percentage, setPercentage] = useState(0)
   // const [difference, setDifference] = useState(0)
-  const [targetAmount, setTargetAmount] = useState(0)
-  const [index, setIndex] = useState(0)
-  const { orderForm } = useOrderForm()
-  const { totalizers } = orderForm
+  // const [targetAmount, setTargetAmount] = useState(0)
+  // const [index, setIndex] = useState(0)
+  // const { orderForm } = useOrderForm()
+  // const { totalizers } = orderForm
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES)
   const { formatMessage } = useIntl()
 
-  const getChannel = async (salesChannel: string) => {
-    settings.freeShippingTradePolicies.forEach(
-      ({ [valueKey]: value, tradePolicy }, idx) => {
-        if (salesChannel === tradePolicy) {
-          setTargetAmount(value)
-          setIndex(idx)
-        }
-      }
-    )
-  }
+  // const getChannel = async (salesChannel: string) => {
+  //   settings.freeShippingTradePolicies.forEach(
+  //     ({ [valueKey]: value, tradePolicy }, idx) => {
+  //       if (salesChannel === tradePolicy) {
+  //         setTargetAmount(value)
+  //         setIndex(idx)
+  //       }
+  //     }
+  //   )
+  // }
 
-  useEffect(() => {
-    if (settings.bindingBounded) {
-      const findAmountForBinding = settings.settings?.find(
-        (item) => item.bindingId === binding?.id
-      )?.freeShippingTradePolicies[index][valueKey]
+  // useEffect(() => {
+  //   if (settings.bindingBounded) {
+  //     const findAmountForBinding = settings.settings?.find(
+  //       (item) => item.bindingId === binding?.id
+  //     )?.freeShippingTradePolicies[index][valueKey]
 
-      if (findAmountForBinding) setTargetAmount(findAmountForBinding)
-    } else if (isSessionSuccess(session)) {
-      getChannel(session?.namespaces?.store?.channel?.value)
-    }
-  }, [binding, session])
+  //     if (findAmountForBinding) setTargetAmount(findAmountForBinding)
+  //   } else if (isSessionSuccess(session)) {
+  //     getChannel(session?.namespaces?.store?.channel?.value)
+  //   }
+  // }, [binding, session])
 
   // const handleUpdateMinicartValue = useCallback(
   //   (val) => {
@@ -73,10 +73,6 @@ const MinimumValue: React.FC<MinimumValueProps> = ({
   //   },
   //   [targetAmount]
   // )
-
-  const finalValue =
-    getTotalizerValueById(totalizers, 'Items') +
-    getTotalizerValueById(totalizers, 'Discounts')
 
   const difference = targetAmount - finalValue / 100
   const percentage = Math.round(finalValue / targetAmount)
