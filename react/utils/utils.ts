@@ -8,8 +8,8 @@ export const isSessionSuccess = (
 }
 
 export const getTotalizerValueById = (
-  totalizers: Totalizer,
-  totalizerId: string
+  totalizers: Totalizer[],
+  totalizerId: ValueTypes
 ) => {
   return totalizers?.find(({ id }) => id === totalizerId)?.value ?? 0
 }

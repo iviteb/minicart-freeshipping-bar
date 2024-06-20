@@ -1,16 +1,16 @@
 import { defineMessages } from 'react-intl'
 
 export const messages = defineMessages({
-  freeshippingCompleteOrder: {
+  freeShippingCompleteOrder: {
     id: 'store/minicartbar.freeshipping.complete-order',
   },
-  freeshippingText: {
+  freeShippingText: {
     id: 'store/minicartbar.freeshipping.text',
   },
-  freeshippingLeft: {
+  freeShippingLeft: {
     id: 'store/minicartbar.freeshipping.left',
   },
-  freeshippingWin: {
+  freeShippingWin: {
     id: 'store/minicartbar.freeshipping.win',
   },
   receiveGiftCompleteOrder: {

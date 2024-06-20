@@ -1,8 +1,6 @@
-type Totalizer = Array<{ id: string; name: string; value: number }>
-
 type FreeShippingProps = {
-  freeShippingAmount: number
-  receiveGiftAmount: number
+  freeShipping: number
+  receiveGift: number
   tradePolicy: string
 }
 
@@ -26,4 +24,12 @@ type Totalizer = {
   id: string
   name: string
   value: number
+}
+
+type TradePolicySettings = Omit<FreeShippingProps, 'tradePolicy'>
+
+type TPK = keyof TradePolicySettings
+
+type SettingsItem = {
+  [key: string]: number
 }

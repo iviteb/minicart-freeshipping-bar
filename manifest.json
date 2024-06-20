@@ -35,12 +35,12 @@
               "title": "Trade Policy (Sales Channel)",
               "type": "string"
             },
-            "freeShippingAmount": {
+            "freeShipping": {
               "title": "Free Shipping Amount",
               "description": "Enter the minimum amount for free shipping on this trade policy",
               "type": "number"
             },
-            "receiveGiftAmount": {
+            "receiveGift": {
               "title": "Receive Gift Amount",
               "description": "Enter the minimum amount to receive a gift on this trade policy",
               "type": "number"
@@ -50,8 +50,6 @@
       }
     }
   },
-  "registries": [
-    "smartcheckout"
-  ],
+  "registries": ["smartcheckout"],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
