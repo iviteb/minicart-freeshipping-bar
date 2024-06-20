@@ -21,3 +21,9 @@ type SettingsProps = {
 }
 
 type ValueTypes = 'Discounts' | 'Items'
+
+type Totalizer = {
+  id: string
+  name: string
+  value: number
+}

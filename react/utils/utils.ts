@@ -6,3 +6,10 @@ export const isSessionSuccess = (
 ): session is SessionSuccess => {
   return (session as SessionSuccess)?.namespaces !== undefined
 }
+
+export const getTotalizerValueById = (
+  totalizers: Totalizer,
+  totalizerId: string
+) => {
+  return totalizers?.find(({ id }) => id === totalizerId)?.value ?? 0
+}

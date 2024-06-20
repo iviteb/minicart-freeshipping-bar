@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback, useState } from 'react'
-import { OrderForm } from 'vtex.order-manager'
+import React, { useEffect, useState } from 'react'
+import { useOrderForm } from 'vtex.order-manager/OrderForm'
 import { useRuntime } from 'vtex.render-runtime'
 import { useIntl } from 'react-intl'
 import { FormattedCurrency } from 'vtex.format-currency'
@@ -7,7 +7,7 @@ import { useRenderSession } from 'vtex.session-client'
 import { useCssHandles } from 'vtex.css-handles'
 import { Progress } from 'vtex.styleguide'
 
-import { isSessionSuccess } from '../utils/utils'
+import { getTotalizerValueById, isSessionSuccess } from '../utils/utils'
 import { messages } from '../utils/messages'
 
 type MessageKey = keyof typeof messages
@@ -34,11 +34,10 @@ const MinimumValue: React.FC<MinimumValueProps> = ({
 }) => {
   const { binding } = useRuntime()
   const { session } = useRenderSession()
-  const [percentage, setPercentage] = useState(0)
-  const [difference, setDifference] = useState(0)
+  // const [percentage, setPercentage] = useState(0)
+  // const [difference, setDifference] = useState(0)
   const [targetAmount, setTargetAmount] = useState(0)
   const [index, setIndex] = useState(0)
-  const { useOrderForm } = OrderForm
   const { orderForm } = useOrderForm()
   const { totalizers } = orderForm
   const { handles, withModifiers } = useCssHandles(CSS_HANDLES)
@@ -67,22 +66,24 @@ const MinimumValue: React.FC<MinimumValueProps> = ({
     }
   }, [binding, session])
 
-  const handleUpdateMinicartValue = useCallback(
-    (val) => {
-      setPercentage(Math.round(val / targetAmount))
-      setDifference(targetAmount - val / 100)
-    },
-    [targetAmount]
-  )
+  // const handleUpdateMinicartValue = useCallback(
+  //   (val) => {
+  //     setPercentage(Math.round(val / targetAmount))
+  //     setDifference(targetAmount - val / 100)
+  //   },
+  //   [targetAmount]
+  // )
 
-  const getValues = (idValue: ValueTypes): number =>
-    totalizers?.find(({ id }) => id === idValue)?.value ?? 0
+  const finalValue =
+    getTotalizerValueById(totalizers, 'Items') +
+    getTotalizerValueById(totalizers, 'Discounts')
 
-  const finalValue = getValues('Items') + getValues('Discounts')
+  const difference = targetAmount - finalValue / 100
+  const percentage = Math.round(finalValue / targetAmount)
 
-  useEffect(() => {
-    handleUpdateMinicartValue(finalValue)
-  }, [handleUpdateMinicartValue, finalValue])
+  // useEffect(() => {
+  //   handleUpdateMinicartValue(finalValue)
+  // }, [handleUpdateMinicartValue, finalValue])
 
   const barFull = difference <= 0
   const valueText = (
