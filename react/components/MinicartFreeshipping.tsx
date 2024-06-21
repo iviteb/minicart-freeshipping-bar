@@ -1,171 +1,77 @@
-import type { FunctionComponent } from 'react'
-import React, { useEffect, useCallback, useState } from 'react'
-import { useOrderForm } from 'vtex.order-manager/OrderForm'
+import React from 'react'
+import { useCssHandles } from 'vtex.css-handles'
 import { useRuntime } from 'vtex.render-runtime'
-import { useQuery } from 'react-apollo'
-import { FormattedMessage } from 'react-intl'
-import { FormattedCurrency } from 'vtex.format-currency'
 import { useRenderSession } from 'vtex.session-client'
+import { OrderForm } from 'vtex.order-manager'
 
-import styles from './MinicartFreeshipping.css'
-import AppSettings from './minicartbarSettings.graphql'
+import useAppSettings from '../hooks/useAppSettings'
+import { getTotalizerValueById, isSessionSuccess } from '../utils/utils'
+import './style.css'
+import BarComponent from './BarComponent'
 
-interface SettingsProps {
-  settings: BindingBoundedSettings
-}
+const CSS_HANDLES = ['freigthScaleContainer'] as const
 
-interface BindingBoundedSettings extends Settings {
-  bindingBounded?: boolean
-  settings?: [Settings]
-}
-interface FreeShippingProps {
-  freeShippingAmount: number
-  tradePolicy: string
-}
-interface Settings {
-  bindingId: string
-  freeShippingTradePolicies: [FreeShippingProps]
-}
-
-type ValueTypes = 'Discounts' | 'Items'
-
-const MinimumFreightValue: FunctionComponent<SettingsProps> = ({
-  settings,
-}) => {
+const MinicartFreeshipping = () => {
+  const { handles } = useCssHandles(CSS_HANDLES)
   const { binding } = useRuntime()
-  const { session } = useRenderSession()
-  const [shippingFreePercentage, setShippingFreePercentage] = useState(0)
-  const [differenceBetwenValues, setDifferenceBetwenValues] = useState(0)
-  const [freeShippingAmount, setFreeShippingAmount] = useState(0)
-  const [freeShippingIndex, setFreeShippingIndex] = useState(0)
+  const { useOrderForm } = OrderForm
   const {
     orderForm: { totalizers },
   } = useOrderForm()
 
-  const getChannel = async salesChannel => {
-    settings.freeShippingTradePolicies.forEach(
-      ({ freeShippingAmount: freeShippingValue, tradePolicy }, index) => {
-        if (salesChannel === tradePolicy) {
-          setFreeShippingAmount(freeShippingValue)
-          setFreeShippingIndex(index)
-        }
-      }
-    )
+  const { session } = useRenderSession()
+  const { settings: appSettings }: { settings: BindingBoundedSettings } =
+    useAppSettings()
+
+  const salesChannel = isSessionSuccess(session)
+    ? session.namespaces?.store?.channel?.value
+    : undefined
+
+  if (!appSettings || !salesChannel) {
+    return null
   }
 
-  useEffect(() => {
-    if (settings.bindingBounded) {
-      const findAmountForBinding = settings.settings?.find(
-        item => item.bindingId === binding?.id
-      )?.freeShippingTradePolicies[freeShippingIndex].freeShippingAmount
+  const { bindingBounded, freeShippingTradePolicies, settings } = appSettings
+  const currentBindingSettings = bindingBounded
+    ? settings?.find((item) => item.bindingId === binding?.id)
+        ?.freeShippingTradePolicies
+    : freeShippingTradePolicies
 
-      if (findAmountForBinding) setFreeShippingAmount(findAmountForBinding)
-    } else if (session?.namespaces) {
-      getChannel(session?.namespaces?.store?.channel?.value)
+  const currentTradePolicySettings: TradePolicySettings | undefined =
+    currentBindingSettings?.find((item) => item.tradePolicy === salesChannel)
+
+  if (!currentTradePolicySettings) {
+    return null
+  }
+
+  const settingsItems: SettingsItem[] = Object.keys(
+    currentTradePolicySettings
+  ).reduce((acc: SettingsItem[], key: string) => {
+    if (key !== 'tradePolicy' && currentTradePolicySettings[key as TPK]) {
+      return [...acc, { [key as TPK]: currentTradePolicySettings[key as TPK] }]
     }
-  }, [binding, session])
 
-  const handleUpdateMinicartValue = useCallback(
-    val => {
-      setShippingFreePercentage(Math.round(val / freeShippingAmount))
-      setDifferenceBetwenValues(freeShippingAmount - val / 100)
-    },
-    [freeShippingAmount]
-  )
+    return acc
+  }, [] as SettingsItem[])
 
-  const getValues = (idValue: ValueTypes): number =>
-    totalizers?.find(({ id }) => id === idValue)?.value ?? 0
-
-  const finalValue = getValues('Items') + getValues('Discounts')
-
-  useEffect(() => {
-    handleUpdateMinicartValue(finalValue)
-  }, [handleUpdateMinicartValue, finalValue])
+  const orderFormItemValue =
+    getTotalizerValueById(totalizers, 'Items') +
+    getTotalizerValueById(totalizers, 'Discounts')
 
   return (
-    <div className={styles.freigthScaleContainer}>
-      {differenceBetwenValues === freeShippingAmount ? (
-        <div className={styles.text0}>
-          <FormattedMessage id="store/minicartbar.text0" />
-          <FormattedCurrency value={Math.max(0, differenceBetwenValues)} />!
-        </div>
-      ) : (
-        <>
-          {differenceBetwenValues > 0 ? (
-            <span>
-              <div className={styles.text1}>
-                <FormattedMessage id="store/minicartbar.text1" />
-                <span className={styles.text2}>
-                  <FormattedMessage id="store/minicartbar.text2" />
-                </span>
-              </div>
-            </span>
-          ) : null}
-          <div className={styles.sliderContainer}>
-            <div
-              className={styles.barContainer}
-              style={{
-                width: `${
-                  shippingFreePercentage < 100 ? shippingFreePercentage : 100
-                }%`,
-              }}
-            />
-          </div>
-          {differenceBetwenValues > 0 ? (
-            <p className={styles.sliderText}>
-              <span className={styles.text3}>
-                <FormattedMessage id="store/minicartbar.text3" />{' '}
-              </span>
-
-              <span className={styles.currencyText}>
-                <FormattedCurrency
-                  value={Math.max(0, differenceBetwenValues)}
-                />
-                !
-              </span>
-            </p>
-          ) : (
-            <p className={styles.text4}>
-              <FormattedMessage id="store/minicartbar.text4" />
-            </p>
-          )}
-        </>
-      )}
+    <div
+      className={`${handles.freigthScaleContainer} w-100 pv5 ph6 t-small lh-copy c-on-base`}
+    >
+      {settingsItems.map((item) => (
+        <BarComponent
+          currentValue={orderFormItemValue}
+          key={Object.keys(item)[0]}
+          targetValue={item[Object.keys(item)[0]]}
+          messagePrefix={Object.keys(item)[0]}
+        />
+      ))}
     </div>
   )
-}
-
-const MinicartFreeshipping: FunctionComponent = () => {
-  const { data } = useQuery(AppSettings, {
-    ssr: false,
-    fetchPolicy: 'no-cache',
-  })
-
-  const { binding } = useRuntime()
-
-  if (!data?.publicSettingsForApp?.message) return null
-  const settings = JSON.parse(data.publicSettingsForApp.message)
-
-  if (
-    !settings.bindingBounded &&
-    !settings.freeShippingTradePolicies[0].freeShippingAmount
-  ) {
-    console.warn('No Free Shipping amount set')
-
-    return null
-  }
-
-  const isAmountSetForBinding = settings.settings?.find(
-    item => item.bindingId === binding?.id
-  )?.freeShippingTradePolicies[0].freeShippingAmount
-
-  if (settings.bindingBounded && !isAmountSetForBinding) {
-    console.warn('No Free Shipping amounts for multi binding store set')
-
-    return null
-  }
-
-  return <MinimumFreightValue settings={settings} />
 }
 
 export default MinicartFreeshipping

@@ -1,29 +1,43 @@
-`=â Use this project, [contribute](https://github.com/vtex-apps/minicart-freeshipping-bar) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).`
-
-> :warning: *Remember to replace the values between braces according to your scenario. For example: https://github.com/vtex-apps/breadcrumb*
-
 # Mini Cart Free Shipping Bar
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-The **Mini Cart Free Shipping Bar** is a MiniCart.v2 component that adds a progress bar to the minicart in order to display how much progress a customer has for to **win** free shipping. 
+![image](https://github.com/iviteb/minicart-freeshipping-bar/assets/77269087/bbff7971-731c-4326-bf8c-fced2daf0b2e)
+![image](https://github.com/iviteb/minicart-freeshipping-bar/assets/77269087/87786efb-bb63-4045-a6de-10c8a82fe808)
 
-This block is **only a visual guide**, meaning it will not make any calculation or deduct the shipping amount from your store. You should pair this app with a **Free Shipping Promotion** of the same **amount**
-The **amount** value, which by default is 200, can be edited inside your store's **Site Editor**. 
-It consist of 4 different texts, which have messages developed for: English, Spanish, Italian and Portuguese. 
+The **Mini Cart Free Shipping Bar** is a MiniCart.v2 component that adds a progress bar to the minicart in order to display how much progress a customer has to **win** free shipping or a gift.
+
+This block is **only a visual guide**, meaning it will not make any calculation or deduct the shipping amount from your store. You should pair this app with a **Free Shipping Promotion** of the same **amount** or a **Gift Promotion**.
+The **amount** value for free shipping or gift, can be edited inside the **App Settings**
+
+The app is compatible with 2 different languages including: English and Romanian.
+
+## Settings
+
+The app has two configurable settings under My Apps section inside VTEX Admin:
+
+- **Free Shipping Amount** - this setting is the **amount** for free shipping and expects a number.
+  This free shipping will be indicated for the different commercial policies, in this case 4 policies have been added
+  This will be the amount customers have to reach for the progress bar to completely fill up.
+- **Receive Gift Amount** - this setting is the **amoount** for gift and expects a number
 
 ## Configuration
-You should first install the app on the desired **Account**. To install run: `vtex install vtex.minicart-freeshipping-bar@0.x` inside the Toolbelt. 
-Once installed, you should declare the app as a **Dependency** inside your store's **Store Theme**:
+
+You should first install the app on the desired **Account**. To install run: `vtex install myhouse.minicart-freeshipping-bar@0.x` inside the Toolbelt.
+After that you should declare the app as a **peerDependency** on your **Manifest** inside your store's **Store Theme**:
+
 ```
-"dependencies": { 
-    "vtex.minicart-freeshipping-bar": "0.x"
+"peerDependencies": {
+    "myhouse.minicart-freeshipping-bar": "0.x"
 }
 ```
 
 After this is completed, you should add the block **minicart-bar** inside your **Store-Theme's Header** under the **MiniCart** section:
+
 ```
 {
   "minicart.v2": {
@@ -102,38 +116,16 @@ After this is completed, you should add the block **minicart-bar** inside your *
   }
 }
 ```
+
 ## Customization
 
-The first thing that should be present in this section is the sentence below, showing users the recipe pertaining to CSS customization in blocks:
-
-Thereafter, you should add a single column table with the available CSS handles for that block:
-
+Here is the list of available CSS Handles you can use on the store
 | CSS Handles |
-| ----------- | 
-| `freigthScaleContainer` | 
-| `.sliderContainer` | 
-| `.barContainer` | 
-| `.sliderText` | 
-| `.text1` |
-| `.text2` |
-| `.text3` |
-| `.text4` |
-| `.currencyText` |
-
-## Contributors (
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-
-**Upcoming documentation:**
-
- - [Fix bug reported regarding totalizers with tax](https://github.com/vtex-apps/minicart-freeshipping-bar/pull/3)
+| ----------- |
+| `.freigthScaleContainer` |
+| `.valueScaleContainer` |
+| `.completeOrder` |
+| `.text` |
+| `.left` |
+| `.win` |
+| `.progressBarContainer` |

@@ -1,4 +1,9 @@
 declare module '*.css' {
-  const css: Record<string, string>
-  export default css
+  type Styles = {
+    [selector: string]: string
+  }
+
+  const styles: Styles
+
+  export default styles
 }

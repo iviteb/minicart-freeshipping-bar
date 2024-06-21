@@ -1,7 +1,10 @@
 {
-  "store/minicartbar.text0": "minicartbar.text0",
-  "store/minicartbar.text1": "minicartbar.text1",
-  "store/minicartbar.text2": "minicartbar.text2",
-  "store/minicartbar.text3": "minicartbar.text3",
-  "store/minicartbar.text4": "minicartbar.text4"
+  "store/minicartbar.freeshipping.complete-order": "store/minicartbar.freeshipping.complete-order",
+  "store/minicartbar.freeshipping.text": "store/minicartbar.freeshipping.text",
+  "store/minicartbar.freeshipping.left": "store/minicartbar.freeshipping.left",
+  "store/minicartbar.freeshipping.win": "store/minicartbar.freeshipping.win",
+  "store/minicartbar.receive-gift.complete-order": "store/minicartbar.receive-gift.complete-order",
+  "store/minicartbar.receive-gift.text": "store/minicartbar.receive-gift.text",
+  "store/minicartbar.receive-gift.left": "store/minicartbar.receive-gift.left",
+  "store/minicartbar.receive-gift.win": "store/minicartbar.receive-gift.win"
 }
